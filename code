@@ -1,0 +1,143 @@
+#importing necessary libraries
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+
+# Load the data from the CSV file
+data=pd.read_csv("/kaggle/input/movies-review/1_movies_per_genre/Action.csv")
+
+  
+# Inspect the first and last few rows of the data
+data.head()
+data.tail()
+
+  
+# Print the number of rows and columns in the dataset
+print("Number of rows=", data.shape[0])
+print("Number of columns=", data.shape[1])
+
+  
+# Display basic statistics for numerical columns
+data.describe()
+# Display basic statistics for object (categorical) columns
+data.describe(include= [object])
+
+  
+# Display the column names
+data.columns.values
+
+  
+# Check for missing values in each column
+data.isnull().sum()
+
+  
+# Display the distribution of ratings
+data['rating'].value_counts()
+
+
+# Check the data type of the 'rating' column
+data['rating'].dtype
+
+
+# Plot the distribution of IMDb Ratings
+sns.histplot(data['rating'], kde = True, bins = 15, color = 'blue')
+plt.title('Distribution of IMDb Ratings')
+plt.xlabel('IMDb Rating')
+plt.ylabel('Frequency')
+
+
+# Function to classify ratings into Good, Average, and Bad categories
+def classify_rating(rating):
+    if rating <= 7:
+        return -1  # Bad
+    elif rating <= 7.7:
+        return 0  # Average
+    else:
+        return 1  # Good
+
+
+# Apply the classification function to the 'rating' column
+data['rating'] = data['rating'].map(classify_rating)
+
+
+# Display the modified 'rating' column and its distribution
+print(data['rating'])
+print(data['rating'].value_counts())
+
+
+# Plot the distribution of classified ratings
+data['rating'].value_counts().plot(kind='bar',title='ratings')
+
+
+# Calculate the percentage distribution of each rating category
+percentage=(data['rating'].value_counts()/data.shape[0])*100
+tags=percentage
+wp={'linewidth':1,'edgecolor':'black'}
+explode= (0.1,0.1,0.1)
+
+
+# Plot the percentage distribution as a pie chart
+tags.plot(kind='pie',autopct="%1.1f%%",shadow=True,wedgeprops=wp,explode=explode,startangle=90)
+
+
+# Display unique values and their counts in the 'movie_rated' column
+data['movie_rated'].unique()
+data['movie_rated'].value_counts()
+
+
+# Plot the distribution of movie ratings
+data['movie_rated'].value_counts().plot(kind='bar',title='movie_rated',color='purple')
+
+
+# Plot the distribution of 'movie_rated' as a histogram
+sns.histplot(data['movie_rated'], kde = True, bins = 3, color = 'pink')
+plt.title('Distribution of movie rated')
+plt.xlabel('rated')
+plt.ylabel('Frequency')
+plt.show()
+
+
+# Group the data by 'movie_rated' and 'rating' and plot the counts
+grouped_data = data.groupby(['movie_rated', 'rating']).size().unstack(fill_value=0)
+grouped_data.plot(kind='bar')
+grouped_data.plot(kind='bar', stacked=True)
+
+
+# Display the distribution of movies by year
+data['year'].value_counts()
+data['year'].value_counts().plot(kind='bar')
+
+
+# Group the data by 'year' and 'movie_rated' and plot the counts
+yearRated_grouped= data.groupby(['year','movie_rated']).size().unstack(fill_value=0)
+fig, ax = plt.subplots(figsize=(12, 8))
+yearRated_grouped.plot(kind="bar",stacked=True,ax=ax)
+
+
+# Drop the 'review_url' column as it's not needed for analysis
+data.drop('review_url', axis=1, inplace=True)
+
+
+# Display the distribution of genres
+data['genres'].value_counts()
+
+
+# Display the 'num_raters' column
+data['num_raters']
+
+
+# Sort and display the top 10 movies by number of raters
+top_10_movies = data.sort_values(by = 'num_raters', ascending = False).head(10)
+top_10_movies
+
+
+# Check the data type of the 'num_reviews' colum
+data['num_reviews'].dtype
+
+
+# Sort and display the top 10 movies by number of reviews
+top_10_movies = data.sort_values(by = 'num_reviews', ascending = False).head(10)
+top_10_movies
+
