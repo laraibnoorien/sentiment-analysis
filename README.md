@@ -1,7 +1,11 @@
 Name: LARAIB NOORIEN
+
 Company: CODTECH IT SOLUTIONS
+
 ID: CT08DS3659
+
 Domain: ARTIFICAL INTELLIGENCE
+
 Duration: JULY to AUGUST 2024
 
 
@@ -16,23 +20,23 @@ The primary objective of this project is to perform sentiment analysis on action
 
 ## key activity
 
-1.Data Loading and Inspection:
+1. Data Loading and Inspection:
 Load the dataset.
 Inspect the data to understand its structure and contents.
 
-2.Data Preprocessing:
+2. Data Preprocessing:
 Clean the data by handling missing values and irrelevant columns.
 Classify the ratings into Good, Average, and Bad categories.
 
-3.Exploratory Data Analysis (EDA):
+3. Exploratory Data Analysis (EDA):
 Analyze the distribution of ratings.
 Examine other attributes such as genres, release dates, and number of raters.
 
-4.Visualization:
+4. Visualization:
 Create various plots to visualize the distribution of ratings and other attributes.
 Generate pie charts and bar plots to illustrate the percentage distribution of classified ratings.
 
-5.Feature Engineering:
+5. Feature Engineering:
 Group data by different attributes and analyze the counts and distributions.
 Drop unnecessary columns and create new features if needed.
 
