@@ -41,9 +41,14 @@ Drop unnecessary columns and create new features if needed.
 ## Technology used
 
 o Python: The primary programming language used for data analysis and manipulation.
+
 o Pandas: For data manipulation and analysis.
+
 o NumPy: For numerical computations.
+
 o Matplotlib: For creating static, interactive, and animated visualizations.
+
 o Seaborn: For statistical data visualization.
+
 o Jupyter Notebook: For interactive data analysis and visualization.
 
